@@ -33,11 +33,13 @@ describe('Products model', () => {
         /* handle error */
       }
     }) // end of name
+
+
+
     it('requires `description` to not be an empty string', async () => {
       const products = Products.build({
         description: ''
       })
-
       try {
         await products.validate()
         throw Error(
