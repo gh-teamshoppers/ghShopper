@@ -30,12 +30,14 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
   //   <hr />
   // </div>
 
-  <Navbar bg="light" expand="lg">
+  <Navbar bg="light" expand="lg" sticky="top">
     <Navbar.Brand href="#home">Expresso.js</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
+        <Nav.Link href="#home" onClick={handleClick}>
+          Home
+        </Nav.Link>
         <Nav.Link href="#link">About Us</Nav.Link>
         <NavDropdown title="Our Coffee" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Light Roast</NavDropdown.Item>
