@@ -6,42 +6,66 @@ const Products = db.define('products', {
   name: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.TEXT,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   preparation: {
     type: Sequelize.STRING,
     unique: false,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   origin: {
     type: Sequelize.STRING,
     unique: false,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   weight: {
     type: Sequelize.STRING,
     unique: false,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   quantity: {
     type: Sequelize.INTEGER,
     unique: false,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   price: {
     type: Sequelize.INTEGER,
     unique: false,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
-  imgUrl:{
+  imgUrl: {
     type: Sequelize.STRING,
     unique: false,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
 })
 
