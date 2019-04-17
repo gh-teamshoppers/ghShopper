@@ -100,17 +100,12 @@ async function seed() {
       return Products.create(product)
     })
   )
-  await Promise.all(
-    seedOrders.map(orders => {
-      return Orders.create(orders)
-    })
-  )
+  // await Promise.all(
+  //   seedOrders.map(orders => {
+  //     return Orders.create(orders)
+  //   })
+  // )
 
-  await Promise.all(
-    seedOrderDetail.map(orderDetails => {
-      return OrderDetail.create(orderDetails)
-    })
-  )
   console.log(`seeded successfully`)
 }
 
