@@ -5,10 +5,6 @@ import CardColumns from 'react-bootstrap/CardColumns'
 import Container from 'react-bootstrap/Container'
 
 class AllCoffees extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {}
-  // }
   componentDidMount() {
     //thunk goes here!
   }

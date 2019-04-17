@@ -31,12 +31,12 @@ export const SingleCoffee = props => {
   )
 }
 
-// const mapStateToProps = state => ({
-//   coffee: state.coffee
-// })
+const mapStateToProps = state => ({
+  coffee: state.coffee
+})
 
-// const mapDispatchToProps = dispatch => ({
-//   // fetchCoffee: coffeeId => dispatch(fetchCoffee(coffeeId))
-// })
+const mapDispatchToProps = dispatch => ({
+  // fetchCoffee: coffeeId => dispatch(fetchCoffee(coffeeId))
+})
 
-// export default connect(mapStateToProps, mapDispatchToProps)(SingleCoffee)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleCoffee)
