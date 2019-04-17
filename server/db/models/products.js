@@ -52,11 +52,12 @@ const Products = db.define('products', {
     }
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     unique: false,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
+      isDecimal: true, 
     }
   },
   imgUrl: {
