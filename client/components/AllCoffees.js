@@ -20,7 +20,7 @@ class AllCoffees extends Component {
             <CardColumns>
               {coffees.map(coffee => (
                 <div key={coffee.id}>
-                  <SingleCoffee key={coffee.id} />
+                  <SingleCoffee key={coffee.id} coffee={coffee} />
                 </div>
               ))}
             </CardColumns>
