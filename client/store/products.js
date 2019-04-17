@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {READCOMMITTED} from 'sequelize/types/lib/table-hints'
 
 /**
  * ACTION TYPES
