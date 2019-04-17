@@ -5,8 +5,8 @@ const {
   User,
   Products,
   Addresses,
-  OrderDetail,
-  Orders
+  Orders,
+  OrdersProducts
 } = require('../server/db/models')
 
 const seedProducts = [
@@ -59,29 +59,15 @@ const seedUsers = [
 const seedOrders = [
   {
     userId: 1,
-    completed: true,
-    product: [
-      {
-        name: 'Peruvian Geisha',
-        description:
-          'For the third straight year, four brothers from the village of Alto Ihuamaca in the San Ignacio region anchor our Peru single-origin lineup. This Bourbon lot from the Pintado brothers reminds us of cherry, grape and caramelized sugar.',
-        preparation: 'Whole bean',
-        origin: 'San Ignacio, Peru',
-        weight: '12 oz',
-        quantity: 10,
-        price: 18.0,
-        imgUrl:
-          'https://images-na.ssl-images-amazon.com/images/I/91SLInFPjGL._SY355_.jpg'
-      }
-    ]
+    completed: true
   }
 ]
 
-const seedOrderDetail = [
+const seedOrdersProducts = [
   {
-    quantity: 20,
+    orderId: 1,
     productId: 1,
-    orderId: 1
+    quantity: 10
   }
 ]
 
@@ -100,11 +86,18 @@ async function seed() {
       return Products.create(product)
     })
   )
-  // await Promise.all(
-  //   seedOrders.map(orders => {
-  //     return Orders.create(orders)
-  //   })
-  // )
+
+  await Promise.all(
+    seedOrders.map(orders => {
+      return Orders.create(orders)
+    })
+  )
+
+  await Promise.all(
+    seedOrdersProducts.map(orderProducts => {
+      return OrdersProducts.create(orderProducts)
+    })
+  )
 
   console.log(`seeded successfully`)
 }

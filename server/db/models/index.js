@@ -17,8 +17,6 @@ User.hasMany(Addresses)
 
 User.hasMany(Orders)
 
-Orders.hasMany(Products)
-
 const OrdersProducts = db.define('OrdersProducts', {
   quantity: {
     type: Sequelize.INTEGER,
