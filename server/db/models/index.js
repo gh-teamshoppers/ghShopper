@@ -14,9 +14,13 @@ const OrderDetail = require('./orderDetail')
 Addresses.belongsTo(User)
 User.hasMany(Addresses)
 
-Orders.hasMany(User)
-OrderDetail.hasMany(Orders)
+User.hasMany(Orders)
+
+Orders.hasMany(OrderDetail)
+
 Products.hasMany(OrderDetail)
+
+
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
