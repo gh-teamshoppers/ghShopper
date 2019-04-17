@@ -3,33 +3,42 @@ import {connect} from 'react-redux'
 import {SingleCoffee} from './SingleCoffee'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Container from 'react-bootstrap/Container'
+import {getCoffees} from '../store/products'
 
 class AllCoffees extends Component {
   componentDidMount() {
-    //thunk goes here!
+    this.props.getCoffees()
   }
 
   render() {
+    const {coffees, loading} = this.props.coffees
+
     return (
       <div>
-        <Container>
-          <CardColumns>
-            {this.state.props.map(coffee => (
-              <div key={coffee.id}>
-                <SingleCoffee key={coffee.id} />
-              </div>
-            ))}
-          </CardColumns>
-        </Container>
+        {coffees && !loading ? (
+          <Container>
+            <CardColumns>
+              {coffees.map(coffee => (
+                <div key={coffee.id}>
+                  <SingleCoffee key={coffee.id} />
+                </div>
+              ))}
+            </CardColumns>
+          </Container>
+        ) : (
+          <h1>still loading!</h1>
+        )}
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  coffee: state.coffee
+  coffees: state.coffees
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+  getCoffees: () => dispatch(getCoffees())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllCoffees)
