@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Orders, OrderDetail} = require('../db/models')
+const {Orders, OrdersProducts, User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -12,53 +12,29 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const singleOrder = await Orders.findByPk({
-      where: {id: req.params.id},
-      include: [{model:OrderDetail}]
-      }
-    )
+    const singleOrder = await OrdersProducts.findByPk(req.params.id)
     res.json(singleOrder)
   } catch (err) {
     next(err)
   }
 })
 
-
-router.post('/:id/addproducts', async (req, res, next) => {
+router.post('/add', async (req, res, next) => {
   try {
-    const newOrderDetail = await OrderDetail.create(req.body)
-
-
-
-    res.status(200).json(newOrderDetail)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.delete('/orderdetail/:id', async (req, res, next) => {
-  try {
-    await OrderDetail.destroy({
+    const data = req.body
+    const [order] = await Orders.findOrCreate({
       where: {
-        id: req.params.id
+        userId: req.body.userId,
+        completed: false
       }
     })
-    res.json(req.params.id).end()
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.put('/:id', async (req, res, next) => {
-  try {
-    const [numOfRows, [updated]] = await Products.update(req.body, {
-      where: {
-        id: req.params.id
-      },
-      returning: true
+    const orderProduct = await OrdersProducts.create({
+      productId: req.body.productId,
+      quantity: req.body.quantity,
+      orderId: order.id
     })
-    console.log('UPDATED', updated)
-    res.json(updated)
+
+    res.status(201).send()
   } catch (err) {
     next(err)
   }
