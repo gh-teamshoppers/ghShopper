@@ -24,32 +24,32 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
     ) : (
       <div>
         <Navbar bg="light" expand="lg" sticky="top">
-          <Navbar.Brand href="/home">Expresso.js</Navbar.Brand>
+          <Navbar.Brand href="/">Expresso.js</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="#home" onClick={handleClick}>
+              <Nav.Link href="/" onClick={handleClick}>
                 Home
               </Nav.Link>
-              <Nav.Link href="#link">About Us</Nav.Link>
+              <Nav.Link href="/about-us">About Us</Nav.Link>
               <NavDropdown title="Our Coffee" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
-                  Light Roast
+                <NavDropdown.Item href="/light-roasts">
+                  Light Roasts
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Medium Roast
+                <NavDropdown.Item href="/medium-roasts">
+                  Medium Roasts
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Dark Roast
+                <NavDropdown.Item href="/dark-roasts">
+                  Dark Roasts
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
+                <NavDropdown.Item href="/all-coffee">
                   All Coffee
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/login">Sign In</Nav.Link>
+              <Nav.Link href="/sign-in">Sign In</Nav.Link>
               <Nav.Link href="/signup">Sign Up</Nav.Link>
-              <Nav.Link href="#cart">Cart</Nav.Link>
+              <Nav.Link href="/cart">Cart</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
