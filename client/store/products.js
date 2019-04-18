@@ -61,10 +61,10 @@ export const getCoffees = () => async dispatch => {
   }
 }
 
-export const getSingleCoffee = coffee => async dispatch => {
+export const getSingleCoffee = coffeeId => async dispatch => {
   try {
     dispatch(gettingCoffees)
-    const {data} = await axios.get(`/api/products/${coffee.id}`)
+    const {data} = await axios.get(`/api/products/${coffeeId}`)
     dispatch(gotSingleCoffee(data))
   } catch (err) {
     console.error(err)
@@ -111,7 +111,7 @@ export default function(state = initialState, action) {
     case GET_SINGLE_COFFEE:
       return {...state, coffee: action.coffee, loading: false}
     case UPDATE_SINGLE_COFFEE:
-      return {...state, coffee: action.campus, loading: false}
+      return {...state, coffee: action.coffee, loading: false}
     case ADD_SINGLE_COFFEE:
       return {
         ...state,

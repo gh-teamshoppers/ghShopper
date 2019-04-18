@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
 export const SingleCoffee = props => {
-  const {name, imgUrl, price} = props.coffee
+  const {name, imgUrl, price, id} = props.coffee
 
   return (
     <div>
@@ -13,7 +13,9 @@ export const SingleCoffee = props => {
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>{price}</Card.Text>
-          <Button variant="primary">See more!</Button>
+          <Link to={`/coffees/${id}`}>
+            <Button variant="primary">See more!</Button>
+          </Link>
           <Button variant="primary">Add To Cart</Button>
         </Card.Body>
       </Card>
