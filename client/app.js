@@ -9,8 +9,6 @@ const App = () => {
     <div>
       <Navbar />
       <Routes />
-      <AllCoffees />
-      {/* <HomePage /> */}
     </div>
   )
 }
