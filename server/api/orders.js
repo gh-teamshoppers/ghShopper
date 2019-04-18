@@ -28,7 +28,6 @@ router.post('/add', async (req, res, next) => {
         completed: false
       }
     })
-    console.log('ORDEER', order)
     const orderProduct = await OrdersProducts.create({
       productId: req.body.productId,
       quantity: req.body.quantity,
