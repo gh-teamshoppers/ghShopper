@@ -23,7 +23,7 @@ router.post('/:userId/cart', async (req, res, next) => {
   try {
     const [order] = await Orders.findOrCreate({
       where: {
-        userId: req.body.userId,
+        userId: req.params.userId,
         completed: false
       }
     })
@@ -47,7 +47,6 @@ router.put('/:userId/cart/:orderId', async (req, res, next) => {
         id: req.params.orderId
       }
     })
-    console.log('order:', order)
     const [numOfOrders, [updated]] = await OrdersProducts.update(
       {
         quantity: req.body.quantity
@@ -61,6 +60,21 @@ router.put('/:userId/cart/:orderId', async (req, res, next) => {
       }
     )
     res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:userId/cart/:orderId', async (req, res, next) => {
+  try {
+    const [order] = await OrdersProducts.findAll({
+      where: {
+        orderId: req.params.orderId,
+        productId: req.body.productId
+      }
+    })
+    await order.destroy()
+    res.json(req.params.id).end()
   } catch (err) {
     next(err)
   }
