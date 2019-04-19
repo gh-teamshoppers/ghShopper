@@ -8,6 +8,7 @@ import SingleCoffeePage from './components/SingleCoffeePage'
 import AllCoffees from './components/AllCoffees'
 import {HomePage} from './components/Homepage'
 import AboutUs from './components/About-us'
+import Cart from './components/Cart'
 
 /**
  * COMPONENT
@@ -29,7 +30,7 @@ class Routes extends Component {
         <Route path="/coffees/:coffeeId" component={SingleCoffeePage} />
         <Route path="/about-us" component={AboutUs} />
         <Route path="/all-coffee" component={AllCoffees} />
-        <Route path="" />
+        <Route path="/cart" component={Cart} />
         <Route path="" />
         <Route path="" />
 
