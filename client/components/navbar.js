@@ -37,7 +37,7 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="/logout" onClick={handleClick}>
-                Log Out
+                Log Out 
               </Nav.Link>
               <Nav.Link href="/cart">Cart</Nav.Link>
             </Nav>
