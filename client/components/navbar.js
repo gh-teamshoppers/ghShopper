@@ -15,10 +15,33 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
           <Navbar.Brand href="/home">Expresso.js</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           {/* The navbar will show these links after you log in */}
-          <Nav.Link to="/home">Home</Nav.Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/" onClick={handleClick}>
+                Home
+              </Nav.Link>
+              <Nav.Link href="/about-us">About Us</Nav.Link>
+              <NavDropdown title="Our Coffee" id="basic-nav-dropdown">
+                <NavDropdown.Item href="/light-roasts">
+                  Light Roasts
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/medium-roasts">
+                  Medium Roasts
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/dark-roasts">
+                  Dark Roasts
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="/all-coffee">
+                  All Coffee
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link href="/logout" onClick={handleClick}>
+                Log Out
+              </Nav.Link>
+              <Nav.Link href="/cart">Cart</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     ) : (
