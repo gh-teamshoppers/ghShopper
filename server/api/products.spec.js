@@ -12,17 +12,18 @@ describe('Product routes', () => {
   })
 
   describe('/api/products/', () => {
-    const name = 'Peruvian Geisha';
-    const description ='very good coffee'
+    const name = 'Peruvian Geisha'
+    const description = 'very good coffee'
     const preparation = 'whole bean'
     const origin = 'Terrazu, Costa Rica'
-    const weight ='20oz'
-    const quantity =20
+    const weight = '20oz'
+    const quantity = 20
     const price = 20.99
-    const imgUrl = "https://images-na.ssl-images-amazon.com/images/I/91SLInFPjGL._SY355_.jpg"
+    const imgUrl =
+      'https://images-na.ssl-images-amazon.com/images/I/91SLInFPjGL._SY355_.jpg'
 
     beforeEach(() => {
-      return Product.create({
+      return Products.create({
         name: name,
         description: description,
         preparation: preparation,
@@ -31,7 +32,6 @@ describe('Product routes', () => {
         quantity: quantity,
         price: price,
         imgUrl: imgUrl
-
       })
     })
 
