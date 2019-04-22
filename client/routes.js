@@ -10,6 +10,8 @@ import {HomePage} from './components/Homepage'
 import AboutUs from './components/About-us'
 import Cart from './components/Cart'
 import LocalStorage from './components/LocalStorage'
+import {CartCheckoutForm} from './components/CartCheckoutForm'
+import cart from './store/cart'
 
 /**
  * COMPONENT
@@ -33,7 +35,7 @@ class Routes extends Component {
         <Route path="/all-coffee" component={AllCoffees} />
         <Route path="/cart" component={Cart} />
         <Route path="/LocalStorage" component={LocalStorage} />
-        <Route path="" />
+        <Route path="/checkout" component={CartCheckoutForm} />
 
         {isLoggedIn && (
           <Switch>
