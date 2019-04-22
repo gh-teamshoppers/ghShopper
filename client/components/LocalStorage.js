@@ -163,8 +163,8 @@ class LocalStorage extends Component {
             value={this.state.newItem}
             onChange={e => this.updateInput('newItem', e.target.value)}
           />
-          <button type=
-          'button'
+          <button
+            type="button"
             onClick={() => this.addItem()}
             disabled={!this.state.newItem.length}
           >
@@ -178,7 +178,10 @@ class LocalStorage extends Component {
                   Product Id: {item.id}
                   Qty:
                   {item.value}
-                  <button onClick={() => this.deleteItem(item.id)}>
+                  <button
+                    type="button"
+                    onClick={() => this.deleteItem(item.id)}
+                  >
                     Remove
                   </button>
                 </li>
