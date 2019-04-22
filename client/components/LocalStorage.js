@@ -44,7 +44,6 @@ class LocalStorage extends Component {
       if (localStorage.hasOwnProperty(key)) {
         // get the key's value from localStorage
         let value = localStorage.getItem(key)
-        // parse the localStorage string and setState
         try {
           value = JSON.parse(value)
           this.setState({[key]: value})
@@ -62,9 +61,6 @@ class LocalStorage extends Component {
     }
   }
 
-  updateInput(key, value) {
-    this.setState({[key]: value})
-  }
   addItem(id) {
     const newItem = {
       id: id,
@@ -93,10 +89,20 @@ class LocalStorage extends Component {
     return list.map(el => el.id).includes(id)
   }
 
-  render() {
-    console.log('thisState', this.state)
-    console.log('this Props', this.props.coffees)
+  updateInput(id) {
+    const list = [...this.state.list]
 
+    const updatedList = list.map(el => {
+      if (el.id === id) {
+        el.value += 1
+      }
+      return el
+    })
+
+    this.setState({list: updatedList})
+  }
+
+  render() {
     const {coffees, loading} = this.props.coffees
 
     return (
@@ -125,7 +131,7 @@ class LocalStorage extends Component {
                           onClick={
                             !this.findId(this.state.list, coffee.id)
                               ? () => this.addItem(coffee.id)
-                              : () => {}
+                              : () => this.updateInput(coffee.id)
                           }
                         >
                           Add To Cart
@@ -161,13 +167,15 @@ class LocalStorage extends Component {
             onClick={() => this.addItem()}
             disabled={!this.state.newItem.length}
           >
-            &#43; Add
+            Add
           </button>
           <br /> <br />
           <ul>
             {this.state.list.map(item => {
               return (
                 <li key={item.id}>
+                  Product Id: {item.id}
+                  Qty:
                   {item.value}
                   <button onClick={() => this.deleteItem(item.id)}>
                     Remove
