@@ -163,7 +163,8 @@ class LocalStorage extends Component {
             value={this.state.newItem}
             onChange={e => this.updateInput('newItem', e.target.value)}
           />
-          <button
+          <button type=
+          'button'
             onClick={() => this.addItem()}
             disabled={!this.state.newItem.length}
           >
