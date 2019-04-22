@@ -1489,37 +1489,59 @@ var addToCart = function addToCart(item, userId) {
       var _ref3 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var _ref4, data;
+        var _ref4, data, updated, _ref5, _data;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                console.log('ITEM', item);
-                console.log('DATA', data);
-                _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/orders/".concat(userId, "/cart"), item);
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/orders/".concat(userId, "/cart/").concat(orderId));
 
-              case 5:
+              case 3:
                 _ref4 = _context2.sent;
                 data = _ref4.data;
-                console.log('DATA', data);
-                dispatch(addedToCart(data));
-                _context2.next = 14;
+
+                if (!data) {
+                  _context2.next = 13;
+                  break;
+                }
+
+                data.quanity++;
+                _context2.next = 9;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.put("api/orders/".concat(userId, "/cart"), data);
+
+              case 9:
+                updated = _context2.sent;
+                dispatch(addedToCart(updated));
+                _context2.next = 18;
                 break;
 
-              case 11:
-                _context2.prev = 11;
+              case 13:
+                _context2.next = 15;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/orders/".concat(userId, "/cart"), item);
+
+              case 15:
+                _ref5 = _context2.sent;
+                _data = _ref5.data;
+                dispatch(addedToCart(_data));
+
+              case 18:
+                _context2.next = 23;
+                break;
+
+              case 20:
+                _context2.prev = 20;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 14:
+              case 23:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 11]]);
+        }, _callee2, null, [[0, 20]]);
       }));
 
       return function (_x2) {

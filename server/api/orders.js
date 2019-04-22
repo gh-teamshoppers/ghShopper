@@ -39,6 +39,17 @@ router.post('/:userId/cart', async (req, res, next) => {
   }
 })
 
+router.get('/:userId/cart/:orderId', async (req, res, next) => {
+  try {
+    const singleOrder = await OrdersProducts.findOne({
+      where: {orderId: req.params.orderId}
+    })
+    res.json(singleOrder)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/:userId/cart/:orderId', async (req, res, next) => {
   try {
     const [order] = await Orders.findAll({

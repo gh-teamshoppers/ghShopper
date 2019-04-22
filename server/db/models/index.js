@@ -20,7 +20,7 @@ User.hasMany(Orders)
 const OrdersProducts = db.define('OrdersProducts', {
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   }
 })
 
