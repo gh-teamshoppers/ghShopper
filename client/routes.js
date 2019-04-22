@@ -12,6 +12,7 @@ import Cart from './components/Cart'
 import LocalStorage from './components/LocalStorage'
 import {CartCheckoutForm} from './components/CartCheckoutForm'
 import cart from './store/cart'
+import { onSubmit } from './components/onSubmit';
 
 /**
  * COMPONENT
@@ -36,7 +37,8 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/LocalStorage" component={LocalStorage} />
         <Route path="/checkout" component={CartCheckoutForm} />
-      
+        <Route path='/submitted' component={onSubmit} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

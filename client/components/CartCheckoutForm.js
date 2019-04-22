@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import {Link} from 'react-router-dom'
 
 export class CartCheckoutForm extends Component {
   constructor(props) {
@@ -103,9 +104,11 @@ export class CartCheckoutForm extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <Link to="/submitted">
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Link>
         </Form>
       </div>
     )
