@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import CardColumns from 'react-bootstrap/CardColumns'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 
 import {getCoffees} from '../store/products'
 import {SingleCoffeeLocalStorage} from './SingleCoffeeLocalStorage'
@@ -63,10 +65,10 @@ class LocalStorage extends Component {
   updateInput(key, value) {
     this.setState({[key]: value})
   }
-  addItem() {
+  addItem(id) {
     const newItem = {
-      id: 1 + Math.random(),
-      value: this.state.newItem.slice()
+      id: id,
+      value: 1
     }
     const list = [...this.state.list]
 
@@ -87,9 +89,16 @@ class LocalStorage extends Component {
     this.setState({list: updatedList})
   }
 
+  findId(list, id) {
+    return list.map(el => el.id).includes(id)
+  }
+
   render() {
+    console.log('thisState', this.state)
+    console.log('this Props', this.props.coffees)
+
     const {coffees, loading} = this.props.coffees
-    console.log(this.props.coffees)
+
     return (
       <div>
         <header>
@@ -103,7 +112,26 @@ class LocalStorage extends Component {
               <CardColumns>
                 {coffees.map(coffee => (
                   <div key={coffee.id}>
-                    <SingleCoffeeLocalStorage coffee={coffee} />
+                    <Card style={{width: '18rem'}}>
+                      <Card.Img variant="top" src={coffee.imgUrl} />
+                      <Card.Body>
+                        <Card.Title>{coffee.name}</Card.Title>
+                        <Card.Text>{coffee.price}</Card.Text>
+                        <Link to={`/coffees/${coffee.id}`}>
+                          <Button variant="primary">See more!</Button>
+                        </Link>
+                        <Button
+                          variant="primary"
+                          onClick={
+                            !this.findId(this.state.list, coffee.id)
+                              ? () => this.addItem(coffee.id)
+                              : () => {}
+                          }
+                        >
+                          Add To Cart
+                        </Button>
+                      </Card.Body>
+                    </Card>
                   </div>
                 ))}
               </CardColumns>

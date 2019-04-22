@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 
 export const SingleCoffeeLocalStorage = props => {
   const {name, imgUrl, price, id} = props.coffee
+  console.log(props)
 
   return (
     <div>

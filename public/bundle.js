@@ -364,6 +364,250 @@ var HomePage = function HomePage(props) {
 
 /***/ }),
 
+/***/ "./client/components/LocalStorage.js":
+/*!*******************************************!*\
+  !*** ./client/components/LocalStorage.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap_CardColumns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/CardColumns */ "./node_modules/react-bootstrap/CardColumns.js");
+/* harmony import */ var react_bootstrap_CardColumns__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_CardColumns__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Container */ "./node_modules/react-bootstrap/Container.js");
+/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/Card.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _store_products__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store/products */ "./client/store/products.js");
+/* harmony import */ var _SingleCoffeeLocalStorage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SingleCoffeeLocalStorage */ "./client/components/SingleCoffeeLocalStorage.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+
+
+var LocalStorage =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(LocalStorage, _Component);
+
+  function LocalStorage(props) {
+    var _this;
+
+    _classCallCheck(this, LocalStorage);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(LocalStorage).call(this, props));
+    _this.state = {
+      newItem: '',
+      list: []
+    };
+    return _this;
+  }
+
+  _createClass(LocalStorage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getCoffees();
+      this.hydrateStateWithLocalStorage();
+      window.addEventListener('beforeunload', this.saveStateToLocalStorage.bind(this));
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.removeEventListener('beforeunload', this.saveStateToLocalStorage.bind(this)); // saves if component has a chance to unmount
+
+      this.saveStateToLocalStorage();
+    }
+  }, {
+    key: "hydrateStateWithLocalStorage",
+    value: function hydrateStateWithLocalStorage() {
+      // for all items in state
+      for (var key in this.state) {
+        // if the key exists in localStorage
+        if (localStorage.hasOwnProperty(key)) {
+          // get the key's value from localStorage
+          var value = localStorage.getItem(key); // parse the localStorage string and setState
+
+          try {
+            value = JSON.parse(value);
+            this.setState(_defineProperty({}, key, value));
+          } catch (e) {
+            // handle empty string
+            this.setState(_defineProperty({}, key, value));
+          }
+        }
+      }
+    }
+  }, {
+    key: "saveStateToLocalStorage",
+    value: function saveStateToLocalStorage() {
+      for (var key in this.state) {
+        localStorage.setItem(key, JSON.stringify(this.state[key]));
+      }
+    }
+  }, {
+    key: "updateInput",
+    value: function updateInput(key, value) {
+      this.setState(_defineProperty({}, key, value));
+    }
+  }, {
+    key: "addItem",
+    value: function addItem(id) {
+      var newItem = {
+        id: id,
+        value: 1
+      };
+
+      var list = _toConsumableArray(this.state.list);
+
+      list.push(newItem);
+      this.setState({
+        list: list,
+        newItem: ''
+      });
+    }
+  }, {
+    key: "deleteItem",
+    value: function deleteItem(id) {
+      // copy current list of items
+      var list = _toConsumableArray(this.state.list); // filter out the item being deleted
+
+
+      var updatedList = list.filter(function (item) {
+        return item.id !== id;
+      });
+      this.setState({
+        list: updatedList
+      });
+    }
+  }, {
+    key: "findId",
+    value: function findId(list, id) {
+      return list.map(function (el) {
+        return el.id;
+      }).includes(id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      console.log('thisState', this.state);
+      console.log('this Props', this.props.coffees);
+      var _this$props$coffees = this.props.coffees,
+          coffees = _this$props$coffees.coffees,
+          loading = _this$props$coffees.loading;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Shopping Cart Local Storage")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, coffees && !loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_4___default.a, null, "local storage render", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_CardColumns__WEBPACK_IMPORTED_MODULE_3___default.a, null, coffees.map(function (coffee) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: coffee.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6___default.a, {
+          style: {
+            width: '18rem'
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6___default.a.Img, {
+          variant: "top",
+          src: coffee.imgUrl
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6___default.a.Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6___default.a.Title, null, coffee.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_6___default.a.Text, null, coffee.price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/coffees/".concat(coffee.id)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          variant: "primary"
+        }, "See more!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          variant: "primary",
+          onClick: !_this2.findId(_this2.state.list, coffee.id) ? function () {
+            return _this2.addItem(coffee.id);
+          } : function () {}
+        }, "Add To Cart"))));
+      }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "still loading!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          padding: 50,
+          textAlign: 'left',
+          maxWidth: 500,
+          margin: 'auto'
+        }
+      }, "Add an item to the list", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        placeholder: "Type item here",
+        value: this.state.newItem,
+        onChange: function onChange(e) {
+          return _this2.updateInput('newItem', e.target.value);
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this2.addItem();
+        },
+        disabled: !this.state.newItem.length
+      }, "+ Add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.list.map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: item.id
+        }, item.value, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.deleteItem(item.id);
+          }
+        }, "Remove"));
+      }))));
+    }
+  }]);
+
+  return LocalStorage;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    coffees: state.coffees
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getCoffees: function getCoffees() {
+      return dispatch(Object(_store_products__WEBPACK_IMPORTED_MODULE_7__["getCoffees"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(LocalStorage));
+
+/***/ }),
+
 /***/ "./client/components/SingleCoffee.js":
 /*!*******************************************!*\
   !*** ./client/components/SingleCoffee.js ***!
@@ -391,6 +635,52 @@ var SingleCoffee = function SingleCoffee(props) {
       imgUrl = _props$coffee.imgUrl,
       price = _props$coffee.price,
       id = _props$coffee.id;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    style: {
+      width: '18rem'
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2___default.a.Img, {
+    variant: "top",
+    src: imgUrl
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2___default.a.Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2___default.a.Title, null, name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2___default.a.Text, null, price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/coffees/".concat(id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    variant: "primary"
+  }, "See more!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    variant: "primary"
+  }, "Add To Cart"))));
+};
+
+/***/ }),
+
+/***/ "./client/components/SingleCoffeeLocalStorage.js":
+/*!*******************************************************!*\
+  !*** ./client/components/SingleCoffeeLocalStorage.js ***!
+  \*******************************************************/
+/*! exports provided: SingleCoffeeLocalStorage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SingleCoffeeLocalStorage", function() { return SingleCoffeeLocalStorage; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/Card.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Button */ "./node_modules/react-bootstrap/Button.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+var SingleCoffeeLocalStorage = function SingleCoffeeLocalStorage(props) {
+  var _props$coffee = props.coffee,
+      name = _props$coffee.name,
+      imgUrl = _props$coffee.imgUrl,
+      price = _props$coffee.price,
+      id = _props$coffee.id;
+  console.log(props);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2___default.a, {
     style: {
       width: '18rem'
@@ -717,8 +1007,6 @@ var Navbarfunc = function Navbarfunc(_ref) {
     href: "/logout",
     onClick: handleClick
   }, "Log Out"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_6___default.a.Link, {
-    href: "/signup"
-  }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_6___default.a.Link, {
     href: "/cart"
   }, "Cart"))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_5___default.a, {
     bg: "light",
@@ -754,7 +1042,9 @@ var Navbarfunc = function Navbarfunc(_ref) {
     href: "/signup"
   }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_6___default.a.Link, {
     href: "/cart"
-  }, "Cart"))))));
+  }, "Cart"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_6___default.a.Link, {
+    href: "/LocalStorage"
+  }, "LocalStorage"))))));
 };
 /**
  * CONTAINER
@@ -912,6 +1202,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Homepage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Homepage */ "./client/components/Homepage.js");
 /* harmony import */ var _components_About_us__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/About-us */ "./client/components/About-us.js");
 /* harmony import */ var _components_Cart__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js");
+/* harmony import */ var _components_LocalStorage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/LocalStorage */ "./client/components/LocalStorage.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -929,6 +1220,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -988,7 +1280,8 @@ function (_Component) {
         path: "/cart",
         component: _components_Cart__WEBPACK_IMPORTED_MODULE_10__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: ""
+        path: "/LocalStorage",
+        component: _components_LocalStorage__WEBPACK_IMPORTED_MODULE_11__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: ""
       }), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -55551,7 +55844,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
