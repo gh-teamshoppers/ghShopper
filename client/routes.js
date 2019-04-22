@@ -9,6 +9,7 @@ import AllCoffees from './components/AllCoffees'
 import {HomePage} from './components/Homepage'
 import AboutUs from './components/About-us'
 import Cart from './components/Cart'
+import LocalStorage from './components/LocalStorage'
 
 /**
  * COMPONENT
@@ -31,7 +32,7 @@ class Routes extends Component {
         <Route path="/about-us" component={AboutUs} />
         <Route path="/all-coffee" component={AllCoffees} />
         <Route path="/cart" component={Cart} />
-        <Route path="" />
+        <Route path="/LocalStorage" component={LocalStorage} />
         <Route path="" />
 
         {isLoggedIn && (

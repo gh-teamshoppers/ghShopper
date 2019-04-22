@@ -10,7 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 const Navbarfunc = ({handleClick, isLoggedIn}) => (
   <div>
     {isLoggedIn ? (
-      
+      <div>
         <Navbar bg="light" expand="lg" sticky="top">
           <Navbar.Brand href="/home">Expresso.js</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -73,6 +73,7 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
               <Nav.Link href="/sign-in">Sign In</Nav.Link>
               <Nav.Link href="/signup">Sign Up</Nav.Link>
               <Nav.Link href="/cart">Cart</Nav.Link>
+              <Nav.Link href="/LocalStorage">LocalStorage</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
