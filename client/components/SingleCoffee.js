@@ -20,15 +20,18 @@ class SingleCoffee extends React.Component {
     const [matched] = cart[0].products.filter(el => {
       return el.id === searchId
     })
-    return matched.OrdersProducts.quantity
+    return matched.OrdersProducts
   }
 
   handleClick(evt) {
     evt.preventDefault()
 
-    const productsIdinCart = this.props.cart[0].products.map(el => el.id)
+    // if (this.props.cart.length !== 0) {
+    // const productsIdinCart = this.props.cart[0].products.map(el => el.id)
 
-    if (!productsIdinCart.includes(this.props.coffee.id)) {
+    // this.props.cart.length === 0 ||
+    // !productsIdinCart.includes(this.props.coffee.id)
+    if (this.props.cart.length === 0) {
       this.props.addToCart(
         this.props.coffee,
         this.props.cart,
@@ -36,16 +39,19 @@ class SingleCoffee extends React.Component {
         this.props.quantity
       )
     } else {
-      console.log('Working in Progress!!  {MACA }')
-      // Working in Progress!!  {MACA }
-      // qty = this.findProductIdinCart(id)
-      // console.log('quantity', qty)
+      //Get the Qty for the Product and +1
+      console.log('addQty', 'coffeeID', this.props.coffee.id, this.props.cart)
+      const qty = this.findProductIdinCart(
+        this.props.coffee.id,
+        this.props.cart
+      ).quantity++
+      console.log(qty)
     }
   }
+  // }
 
   render() {
     const {name, imgUrl, price, id} = this.props.coffee
-    console.log('UserID', this.props.userId)
 
     return (
       <div>
