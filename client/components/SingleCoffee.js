@@ -17,37 +17,35 @@ class SingleCoffee extends React.Component {
   }
 
   findProductIdinCart(searchId, cart) {
-    const [matched] = cart[0].products.filter(el => {
+    const matched = cart[0].products.filter(el => {
       return el.id === searchId
     })
-    return matched.OrdersProducts
+    return matched[0].OrdersProducts
   }
 
   handleClick(evt) {
     evt.preventDefault()
-
-    // if (this.props.cart.length !== 0) {
-    // const productsIdinCart = this.props.cart[0].products.map(el => el.id)
-
-    // this.props.cart.length === 0 ||
-    // !productsIdinCart.includes(this.props.coffee.id)
-    if (this.props.cart.length === 0) {
+    if (
+      this.props.cart.length === 0 ||
+      !this.findProductIdinCart(this.props.coffee.id, this.props.cart)
+    ) {
       this.props.addToCart(
         this.props.coffee,
         this.props.cart,
         this.props.userId,
         this.props.quantity
       )
-    } else {
-      //Get the Qty for the Product and +1
-      console.log('addQty', 'coffeeID', this.props.coffee.id, this.props.cart)
+    } else if (
+      this.findProductIdinCart(this.props.coffee.id, this.props.cart)
+    ) {
       const qty = this.findProductIdinCart(
         this.props.coffee.id,
         this.props.cart
       ).quantity++
-      console.log(qty)
+      console.log('New Qty', qty)
     }
   }
+
   // }
 
   render() {
