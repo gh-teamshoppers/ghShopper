@@ -17,9 +17,7 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links after you log in */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/" onClick={handleClick}>
-                Home
-              </Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about-us">About Us</Nav.Link>
               <NavDropdown title="Our Coffee" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/light-roasts">
