@@ -6,9 +6,8 @@ const ADDED_TO_CART = 'ADDED_TO_CART'
 
 //ACTION CREATOR
 
-const gotCartItems = (orderId, items) => ({
+const gotCartItems = items => ({
   type: GOT_CART_ITEMS,
-  orderId,
   items
 })
 
@@ -20,9 +19,9 @@ const addedToCart = newCartData => ({
 let initialState = []
 
 //THUNKS
-export const fetchCartItems = orderId => async dispatch => {
+export const fetchCartItems = userId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/orders/cart/${orderId}`)
+    const {data} = await axios.get(`/api/orders/cart/${userId}`)
     dispatch(gotCartItems(data))
   } catch (err) {
     console.error(err)
@@ -30,16 +29,20 @@ export const fetchCartItems = orderId => async dispatch => {
 }
 
 export const addToCart = (item, cart, userId, quantity) => async dispatch => {
-  console.log('item', item, 'cart####', cart)
   try {
     if (!cart.includes(item) || cart.length === 0) {
       const {data} = await axios.post(`api/orders/${userId}/cart`, {
-        id: item.id,
+        productId: item.id,
         quantity: 1
       })
-      console.log('NEW CART', data)
       dispatch(addedToCart(data))
-    } else console.log('not actions')
+    } else {
+      const {data} = await axios.put(`api/orders/${userId}/cart/${orderId}`, {
+        productId: item.id,
+        quantity: quantity++
+      })
+      dispatch(addedToCart(data))
+    }
   } catch (error) {
     console.error(error)
   }

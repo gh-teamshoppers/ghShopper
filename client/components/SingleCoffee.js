@@ -3,28 +3,47 @@ import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import {connect} from 'react-redux'
-import {addToCart} from '../store/cart'
+import {fetchCartItems, addToCart} from '../store/cart'
 
 class SingleCoffee extends React.Component {
   constructor(props) {
     super(props)
-
     this.handleClick = this.handleClick.bind(this)
+    this.findProductIdinCart = this.findProductIdinCart.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.fetchCartItems(this.props.userId)
+  }
+
+  findProductIdinCart(productId, cart) {
+    const [matched] = cart[0].products.filter(el => {
+      return el.id === productId
+    })
+    return matched.OrdersProducts.quantity
   }
 
   handleClick(evt) {
     evt.preventDefault()
-    console.log('props', this.props.cart)
-    this.props.addToCart(
-      this.props.coffee,
-      this.props.cart,
-      this.props.userId,
-      this.props.quantity
-    )
+
+    const productsIdinCart = this.props.cart[0].products.map(el => el.id)
+
+    if (!productsIdinCart.includes(this.props.coffee.id)) {
+      this.props.addToCart(
+        this.props.coffee,
+        this.props.cart,
+        this.props.userId,
+        this.props.quantity
+      )
+    } else {
+      qty = this.findProductIdinCart(this.props.coffee.id, this.cart)
+      console.log('quantity', qty)
+    }
   }
 
   render() {
     const {name, imgUrl, price, id} = this.props.coffee
+    console.log('CART PROPS', id)
 
     return (
       <div>
@@ -55,7 +74,8 @@ const mapStateToProps = state => ({
 
 const mapDispatch = dispatch => ({
   addToCart: (item, userId, quantity) =>
-    dispatch(addToCart(item, userId, quantity))
+    dispatch(addToCart(item, userId, quantity)),
+  fetchCartItems: orderId => dispatch(fetchCartItems(orderId))
 })
 
 export default connect(mapStateToProps, mapDispatch)(SingleCoffee)
