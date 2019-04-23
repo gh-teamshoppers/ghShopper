@@ -12,7 +12,7 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
     {isLoggedIn ? (
       <div>
         <Navbar bg="light" expand="lg" sticky="top">
-          <Navbar.Brand href="/home">Expresso.js</Navbar.Brand>
+          <Navbar.Brand href="/">Expresso.js</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           {/* The navbar will show these links after you log in */}
           <Navbar.Collapse id="basic-navbar-nav">

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 import {getSingleCoffee} from '../store'
+import {addToCart} from '../store/cart'
 
 export class SingleCoffeePage extends React.Component {
   componentDidMount() {
@@ -44,7 +45,7 @@ export class SingleCoffeePage extends React.Component {
           {price}
         </p>
         <p>
-          <Button variant="primary">Learn more!</Button>
+          <Button variant="primary">Add To Cart</Button>
         </p>
       </Jumbotron>
     )
@@ -56,7 +57,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCoffee: coffeeId => dispatch(getSingleCoffee(coffeeId))
+  getCoffee: coffeeId => dispatch(getSingleCoffee(coffeeId)),
+  addToCart: () => dispatch(addToCart())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleCoffeePage)
