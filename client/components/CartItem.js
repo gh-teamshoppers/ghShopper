@@ -2,6 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 
 const CartItem = props => {
+  const {imgUrl, quantity, price, size, name} = props.item
   return (
     <Card style={{width: '18rem'}}>
       <Card.Body>

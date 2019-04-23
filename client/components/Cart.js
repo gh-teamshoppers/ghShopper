@@ -1,7 +1,9 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
+import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import CartItem from './CartItem'
+import {fetchCartItems} from '../store/cart'
 
 class Cart extends React.Component {
   constructor(props) {
@@ -9,18 +11,32 @@ class Cart extends React.Component {
     this.state = {}
   }
 
+  componentDidMount() {
+    this.props.fetchCart(this.props.user.id)
+  }
+
   handleClick(evt) {
     evt.preventDefault()
   }
 
   render() {
+    const {cart} = this.props
+    console.log(this.props)
     return (
       <div>
         <br />
         Shopping Cart:
         <br />
         <br />
-        <CartItem />
+        {cart ? (
+          cart.map(item => (
+            <div key={item.id}>
+              <CartItem item={item} />
+            </div>
+          ))
+        ) : (
+          <h3>YOUR CART IS EMPTY</h3>
+        )}
         <br />
         <br />
         <h3>Order Total: </h3>
@@ -35,4 +51,13 @@ class Cart extends React.Component {
   }
 }
 
-export default Cart
+const mapStateToProps = state => ({
+  cart: state.cart,
+  user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchCart: userId => dispatch(fetchCartItems(userId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
