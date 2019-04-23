@@ -13,7 +13,9 @@ class SingleCoffee extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchCartItems(this.props.userId)
+    if (this.props.userId) {
+      this.props.fetchCartItems(this.props.userId)
+    }
   }
 
   findProductIdinCart(searchId, cart) {
@@ -82,8 +84,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  addToCart: (item, userId, quantity) =>
-    dispatch(addToCart(item, userId, quantity)),
+  addToCart: (item, cart, userId, quantity) =>
+    dispatch(addToCart(item, cart, userId, quantity)),
   fetchCartItems: orderId => dispatch(fetchCartItems(orderId))
 })
 

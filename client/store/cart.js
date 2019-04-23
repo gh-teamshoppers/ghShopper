@@ -21,8 +21,10 @@ let initialState = []
 //THUNKS
 export const fetchCartItems = userId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/orders/cart/${userId}`)
-    dispatch(gotCartItems(data))
+    if (userId) {
+      const {data} = await axios.get('/api/orders/cart')
+      dispatch(gotCartItems(data))
+    }
   } catch (err) {
     console.error(err)
   }
@@ -30,18 +32,25 @@ export const fetchCartItems = userId => async dispatch => {
 
 export const addToCart = (item, cart, userId, quantity) => async dispatch => {
   try {
-    if (!cart.includes(item) || cart.length === 0) {
+    console.log('hitting addToCart')
+    if (userId) {
+      // axios routes
       const {data} = await axios.post(`api/orders/${userId}/cart`, {
         productId: item.id,
         quantity: 1
       })
       dispatch(addedToCart(data))
     } else {
-      const {data} = await axios.put(`api/orders/${userId}/cart/${orderId}`, {
-        productId: item.id,
-        quantity: quantity++
-      })
-      dispatch(addedToCart(data))
+      //localStorage
+      let itemsArray = localStorage.getItem('items')
+        ? JSON.parse(localStorage.getItem('items'))
+        : []
+
+      itemsArray.push(item)
+
+      localStorage.setItem('items', JSON.stringify(itemsArray))
+
+      dispatch(addedToCart(item))
     }
   } catch (error) {
     console.error(error)
