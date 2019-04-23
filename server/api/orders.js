@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Orders, OrdersProducts, User} = require('../db/models')
+const {Orders, OrdersProducts, User, Products} = require('../db/models')
 
 router.get('/cart', async (req, res, next) => {
   try {
@@ -10,9 +10,35 @@ router.get('/cart', async (req, res, next) => {
   }
 })
 
-router.get('/cart/:id', async (req, res, next) => {
+// router.get('/cart/:id', async (req, res, next) => {
+//   try {
+//     const singleOrder = await OrdersProducts.findByPk(req.params.id)
+//     res.json(singleOrder)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+/// get all the item for the cart for 1 user
+router.get('/cart/:userId', async (req, res, next) => {
   try {
-    const singleOrder = await OrdersProducts.findByPk(req.params.id)
+    const orders = await Orders.findAll({
+      where: {userId: req.params.userId},
+      include: [{model: Products}]
+    })
+
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// get the Detail for the Cart in one Line
+router.get('/:userId/cart/:orderId', async (req, res, next) => {
+  try {
+    const singleOrder = await OrdersProducts.findOne({
+      where: {orderId: req.params.orderId}
+    })
     res.json(singleOrder)
   } catch (err) {
     next(err)
@@ -28,23 +54,12 @@ router.post('/:userId/cart', async (req, res, next) => {
       }
     })
     const orderProduct = await OrdersProducts.create({
-      productId: req.body.id,
+      productId: req.body.productId,
       quantity: req.body.quantity,
       orderId: order.id
     })
 
-    res.status(201).send()
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/:userId/cart/:orderId', async (req, res, next) => {
-  try {
-    const singleOrder = await OrdersProducts.findOne({
-      where: {orderId: req.params.orderId}
-    })
-    res.json(singleOrder)
+    res.status(201).json(orderProduct)
   } catch (err) {
     next(err)
   }
