@@ -12,7 +12,7 @@ import Cart from './components/Cart'
 import LocalStorage from './components/LocalStorage'
 import {CartCheckoutForm} from './components/CartCheckoutForm'
 import cart from './store/cart'
-import { onSubmit } from './components/onSubmit';
+import {onSubmit} from './components/onSubmit'
 
 /**
  * COMPONENT
@@ -33,16 +33,16 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/coffees/:coffeeId" component={SingleCoffeePage} />
         <Route path="/about-us" component={AboutUs} />
-        <Route path="/all-coffee" component={AllCoffees} />
+        <Route path="/allcoffee" component={LocalStorage} />
         <Route path="/cart" component={Cart} />
-        <Route path="/LocalStorage" component={LocalStorage} />
         <Route path="/checkout" component={CartCheckoutForm} />
-        <Route path='/submitted' component={onSubmit} />
+        <Route path="/submitted" component={onSubmit} />
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/" component={UserHome} />
+            <Route path="/all-coffee" component={AllCoffees} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
