@@ -1,6 +1,8 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import {Link} from 'react-router-dom'
+import CartItem from './CartItem'
+
 class Cart extends React.Component {
   constructor(props) {
     super(props)
@@ -14,7 +16,15 @@ class Cart extends React.Component {
   render() {
     return (
       <div>
-        Shopping Cart
+        <br />
+        Shopping Cart:
+        <br />
+        <br />
+        <CartItem />
+        <br />
+        <br />
+        <h3>Order Total: </h3>
+        <br />
         <Link to="/checkout">
           <Button variant="primary" type="submit">
             Checkout
@@ -26,4 +36,3 @@ class Cart extends React.Component {
 }
 
 export default Cart
-

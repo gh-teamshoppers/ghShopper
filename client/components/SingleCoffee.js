@@ -55,9 +55,11 @@ class SingleCoffee extends React.Component {
             <Link to={`/coffees/${id}`}>
               <Button variant="primary">See more!</Button>
             </Link>
-            <Button onClick={this.handleClick} variant="primary">
-              Add To Cart
-            </Button>
+            <Link to="/cart">
+              <button onClick={this.handleClick} type="primary">
+                Add To Cart
+              </button>
+            </Link>
           </Card.Body>
         </Card>
       </div>
