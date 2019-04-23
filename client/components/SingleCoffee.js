@@ -16,9 +16,9 @@ class SingleCoffee extends React.Component {
     this.props.fetchCartItems(this.props.userId)
   }
 
-  findProductIdinCart(productId, cart) {
+  findProductIdinCart(searchId, cart) {
     const [matched] = cart[0].products.filter(el => {
-      return el.id === productId
+      return el.id === searchId
     })
     return matched.OrdersProducts.quantity
   }
@@ -36,14 +36,16 @@ class SingleCoffee extends React.Component {
         this.props.quantity
       )
     } else {
-      qty = this.findProductIdinCart(this.props.coffee.id, this.cart)
-      console.log('quantity', qty)
+      console.log('Working in Progress!!  {MACA }')
+      // Working in Progress!!  {MACA }
+      // qty = this.findProductIdinCart(id)
+      // console.log('quantity', qty)
     }
   }
 
   render() {
     const {name, imgUrl, price, id} = this.props.coffee
-    console.log('CART PROPS', id)
+    console.log('UserID', this.props.userId)
 
     return (
       <div>
@@ -55,11 +57,9 @@ class SingleCoffee extends React.Component {
             <Link to={`/coffees/${id}`}>
               <Button variant="primary">See more!</Button>
             </Link>
-            <Link to="/cart">
-              <button onClick={this.handleClick} type="primary">
-                Add To Cart
-              </button>
-            </Link>
+            <Button onClick={this.handleClick} variant="primary">
+              Add To Cart
+            </Button>
           </Card.Body>
         </Card>
       </div>
