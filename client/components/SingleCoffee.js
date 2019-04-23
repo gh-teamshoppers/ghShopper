@@ -14,9 +14,10 @@ class SingleCoffee extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    console.log('you clicked the button')
+    console.log('props', this.props.cart)
     this.props.addToCart(
       this.props.coffee,
+      this.props.cart,
       this.props.userId,
       this.props.quantity
     )
@@ -48,6 +49,7 @@ class SingleCoffee extends React.Component {
 const mapStateToProps = state => ({
   coffees: state.coffees,
   userId: state.user.id,
+  cart: state.cart,
   quantity: 1
 })
 

@@ -33,7 +33,7 @@ router.post('/:userId/cart', async (req, res, next) => {
       orderId: order.id
     })
 
-    res.status(201).send()
+    res.status(201).json(orderProduct)
   } catch (err) {
     next(err)
   }
