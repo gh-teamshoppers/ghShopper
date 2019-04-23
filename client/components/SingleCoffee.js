@@ -13,7 +13,9 @@ class SingleCoffee extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchCartItems(this.props.userId)
+    if (this.props.userId) {
+      this.props.fetchCartItems(this.props.userId)
+    }
   }
 
   findProductIdinCart(searchId, cart) {
@@ -25,22 +27,23 @@ class SingleCoffee extends React.Component {
 
   handleClick(evt) {
     evt.preventDefault()
+    console.log(this.props)
 
-    const productsIdinCart = this.props.cart[0].products.map(el => el.id)
+    // const productsIdinCart = this.props.cart[0].products.map(el => el.id)
 
-    if (!productsIdinCart.includes(this.props.coffee.id)) {
-      this.props.addToCart(
-        this.props.coffee,
-        this.props.cart,
-        this.props.userId,
-        this.props.quantity
-      )
-    } else {
-      console.log('Working in Progress!!  {MACA }')
-      // Working in Progress!!  {MACA }
-      // qty = this.findProductIdinCart(id)
-      // console.log('quantity', qty)
-    }
+    // if (!productsIdinCart.includes(this.props.coffee.id)) {
+    this.props.addToCart(
+      this.props.coffee,
+      this.props.cart,
+      this.props.userId,
+      this.props.quantity
+    )
+    //} else {
+    // console.log('Working in Progress!!  {MACA }')
+    // Working in Progress!!  {MACA }
+    // qty = this.findProductIdinCart(id)
+    // console.log('quantity', qty)
+    //}
   }
 
   render() {
@@ -78,8 +81,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  addToCart: (item, userId, quantity) =>
-    dispatch(addToCart(item, userId, quantity)),
+  addToCart: (item, cart, userId, quantity) =>
+    dispatch(addToCart(item, cart, userId, quantity)),
   fetchCartItems: orderId => dispatch(fetchCartItems(orderId))
 })
 
