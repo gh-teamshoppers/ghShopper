@@ -36,7 +36,7 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
                   All Coffee
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/logout" onClick={handleClick}>
+              <Nav.Link href="/" onClick={handleClick}>
                 Log Out
               </Nav.Link>
               <Nav.Link href="/cart">Cart</Nav.Link>
