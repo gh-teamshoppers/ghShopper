@@ -19,8 +19,8 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
             <Nav className="mr-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/about-us">About Us</Nav.Link>
-              <Nav.Link href="/all-coffee">Our Coffee</Nav.Link>
-              <Nav.Link href="/cart">Cart</Nav.Link>
+              <Link to="/all-coffee">Our Coffee</Link>
+              <Link to="/cart">Cart</Link>
 
               <Nav.Link href="/" onClick={handleClick}>
                 {' '}
@@ -42,8 +42,8 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
                 Home{' '}
               </Nav.Link>
               <Nav.Link href="/about-us">About Us</Nav.Link>
-              <Nav.Link href="/allcoffee">Our Coffee</Nav.Link>
-              <Nav.Link href="/cart">Cart</Nav.Link>
+              <Link to="/allcoffee">Our Coffee</Link>
+              <Link to="/cart">Cart</Link>
 
               <Nav.Link href="/sign-in">Sign In</Nav.Link>
               <Nav.Link href="/signup">Sign Up</Nav.Link>
