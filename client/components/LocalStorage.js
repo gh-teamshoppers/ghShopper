@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import CardColumns from 'react-bootstrap/CardColumns'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 
 import {getCoffees} from '../store/products'
 import {SingleCoffeeLocalStorage} from './SingleCoffeeLocalStorage'
@@ -42,7 +44,6 @@ class LocalStorage extends Component {
       if (localStorage.hasOwnProperty(key)) {
         // get the key's value from localStorage
         let value = localStorage.getItem(key)
-        // parse the localStorage string and setState
         try {
           value = JSON.parse(value)
           this.setState({[key]: value})
@@ -60,13 +61,10 @@ class LocalStorage extends Component {
     }
   }
 
-  updateInput(key, value) {
-    this.setState({[key]: value})
-  }
-  addItem() {
+  addItem(id) {
     const newItem = {
-      id: 1 + Math.random(),
-      value: this.state.newItem.slice()
+      id: id,
+      value: 1
     }
     const list = [...this.state.list]
 
@@ -87,9 +85,26 @@ class LocalStorage extends Component {
     this.setState({list: updatedList})
   }
 
+  findId(list, id) {
+    return list.map(el => el.id).includes(id)
+  }
+
+  updateInput(id) {
+    const list = [...this.state.list]
+
+    const updatedList = list.map(el => {
+      if (el.id === id) {
+        el.value += 1
+      }
+      return el
+    })
+
+    this.setState({list: updatedList})
+  }
+
   render() {
     const {coffees, loading} = this.props.coffees
-    console.log(this.props.coffees)
+
     return (
       <div>
         <header>
@@ -103,7 +118,26 @@ class LocalStorage extends Component {
               <CardColumns>
                 {coffees.map(coffee => (
                   <div key={coffee.id}>
-                    <SingleCoffeeLocalStorage coffee={coffee} />
+                    <Card style={{width: '18rem'}}>
+                      <Card.Img variant="top" src={coffee.imgUrl} />
+                      <Card.Body>
+                        <Card.Title>{coffee.name}</Card.Title>
+                        <Card.Text>{coffee.price}</Card.Text>
+                        <Link to={`/coffees/${coffee.id}`}>
+                          <Button variant="primary">See more!</Button>
+                        </Link>
+                        <Button
+                          variant="primary"
+                          onClick={
+                            !this.findId(this.state.list, coffee.id)
+                              ? () => this.addItem(coffee.id)
+                              : () => this.updateInput(coffee.id)
+                          }
+                        >
+                          Add To Cart
+                        </Button>
+                      </Card.Body>
+                    </Card>
                   </div>
                 ))}
               </CardColumns>
@@ -121,26 +155,14 @@ class LocalStorage extends Component {
             margin: 'auto'
           }}
         >
-          Add an item to the list
+          CART LIST
           <br />
-          <input
-            type="text"
-            placeholder="Type item here"
-            value={this.state.newItem}
-            onChange={e => this.updateInput('newItem', e.target.value)}
-          />
-          <button
-            onClick={() => this.addItem()}
-            disabled={!this.state.newItem.length}
-          >
-            &#43; Add
-          </button>
           <br /> <br />
           <ul>
             {this.state.list.map(item => {
               return (
                 <li key={item.id}>
-                  {item.value}
+                  Product Id:{item.id} --- Qty: {item.value}
                   <button onClick={() => this.deleteItem(item.id)}>
                     Remove
                   </button>
