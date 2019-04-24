@@ -59,7 +59,7 @@ class SingleCoffee extends React.Component {
           <Card.Img variant="top" src={imgUrl} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Card.Text>{price}</Card.Text>
+            <Card.Text>Price: ${price}</Card.Text>
 
             <Link to={`/coffees/${id}`}>
               <Button variant="primary">See more!</Button>
