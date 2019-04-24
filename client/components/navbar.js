@@ -40,7 +40,9 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
     ) : (
       <div>
         <Navbar bg="light" expand="lg" sticky="top">
-          <Navbar.Brand href="/">Expresso.js</Navbar.Brand>
+          <Navbar.Brand href="/" className="banner">
+            Expresso.js
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">

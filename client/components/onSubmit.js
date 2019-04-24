@@ -8,7 +8,7 @@ export class onSubmit extends Component {
     return (
       <Jumbotron fluid>
         <Container>
-          <h1>Thank you!</h1>
+          <h1>Thanks a latte!</h1>
           <p>You have successfully completed your order!</p>
         </Container>
       </Jumbotron>
