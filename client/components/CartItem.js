@@ -13,7 +13,8 @@ const CartItem = props => {
         <Card.Img variant="top" src={imgUrl} />
         <br />
         <br />
-        <Card.Subtitle className="mb-2 text-muted">Quantity: 1</Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">
+    Quantity: 1</Card.Subtitle>
         <br />
         <Card.Subtitle className="mb-2 text-muted">
           Price: ${price}{' '}
