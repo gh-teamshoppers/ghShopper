@@ -50,7 +50,7 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
                 {' '}
                 Home{' '}
               </Link>
-              <Link class="navbar" to="/about-us">
+              <Link className="navbar" to="/about-us">
                 About Us
               </Link>
               <Link className="navbar" to="/allcoffee">
