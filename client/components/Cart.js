@@ -24,23 +24,24 @@ class Cart extends React.Component {
   render() {
     const {cart} = this.props
     return (
-      <div>
+      <div className="cart">
         <br />
-        Shopping Cart:
+        <h2>Shopping Cart:</h2>
         <br />
         <br />
         {cart ? (
           cart.map(item => (
             <div key={item.id}>
               <CartItem item={item} />
+              <br />
             </div>
           ))
         ) : (
-          <h3>YOUR CART IS EMPTY</h3>
+          <h2>YOUR CART IS EMPTY</h2>
         )}
         <br />
         <br />
-        <h3>Order Total: </h3>
+        <h2>Order Total: </h2>
         <br />
         <Link to="/checkout">
           <Button variant="primary" type="submit">
