@@ -41,7 +41,16 @@ class Cart extends React.Component {
         )}
         <br />
         <br />
-        <h2>Order Total: </h2>
+        <h2>
+          Order Total: $
+          {cart
+            ? cart
+                .map(product => {
+                  return product.price
+                })
+                .reduce((a, b) => Number(a) + Number(b), 0)
+            : 0}{' '}
+        </h2>
         <br />
         <Link to="/checkout">
           <Button variant="primary" type="submit">
