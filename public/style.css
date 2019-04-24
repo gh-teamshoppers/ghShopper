@@ -1,30 +1,38 @@
-body {
+.banner {
+  background-color: tan;
+  color: whitesmoke;
+  font-weight: 300;
+  border-radius: 1em;
+  outline: none;
+  cursor: pointer;
+  padding: 15px 35px;
+  font-size: 17px;
+  margin: 35px;
+  font-size: 150%;
   font-family: sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
-}
 .navbar {
   background-color: #555;
-  color: black;
-  border-radius: 3em;
+  color: whitesmoke;
+  font-weight: 100;
+  border-radius: 1em;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 12px 35px;
   font-size: 17px;
-} */
+  margin: 20px;
+  font-size: 150%;
+  font-family: sans-serif;
+}
+
+.slideshow {
+  max-width: 1300px;
+  max-height: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.d-block {
+  border-radius: 25px;
+}
