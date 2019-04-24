@@ -19,3 +19,12 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+.navbar {
+  background-color: #555;
+  color: black;
+  border-radius: 3em;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+} */
