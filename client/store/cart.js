@@ -32,14 +32,37 @@ export const fetchCartItems = userId => async dispatch => {
 
 export const addToCart = (item, cart, userId, quantity) => async dispatch => {
   try {
-    console.log('hitting addToCart')
     if (userId) {
       // axios routes
-      const {data} = await axios.post(`api/orders/${userId}/cart`, {
-        productId: item.id,
-        quantity: 1
-      })
-      dispatch(addedToCart(data))
+      console.log('item', item)
+      console.log('cart', cart)
+      console.log('item', !cart.includes(item))
+
+      if (cart.length === 0) {
+        const {newCartData} = await axios.post(`api/orders/${userId}/cart`, {
+          productId: item.id,
+          quantity: 1
+        })
+        dispatch(addedToCart(newCartData))
+      } else {
+        console.log('item', !cart.includes(item))
+        if (!cart.includes(item)) {
+          const {newCartData} = await axios.post(`api/orders/${userId}/cart`, {
+            productId: item.id,
+            quantity: 1
+          })
+          dispatch(addedToCart(newCartData))
+        } else if (cart.includes(item)) {
+          const {newCartData} = await axios.put(
+            `api/orders/${userId}/cart/${orderId}`,
+            {
+              productId: item.id,
+              quantity: quantity++
+            }
+          )
+          dispatch(addedToCart(newCartData))
+        }
+      }
     } else {
       //localStorage
       let itemsArray = localStorage.getItem('items')
@@ -55,8 +78,6 @@ export const addToCart = (item, cart, userId, quantity) => async dispatch => {
   } catch (error) {
     console.error(error)
   }
-
-
 }
 
 //REDUCER
