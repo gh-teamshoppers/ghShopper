@@ -19,32 +19,51 @@ class SingleCoffee extends React.Component {
   }
 
   findProductIdinCart(searchId, cart) {
-    // const matched = cart[0].products.filter(el => {
-    //   return el.id === searchId
-    // })
-    // return matched[0].OrdersProducts
+    if (cart[0].products !== undefined) {
+      console.log(cart[0].products)
+      const matched = cart[0].products.filter(el => {
+        return el.id === searchId
+      })
+
+      console.log('searchid', searchId)
+
+      console.log('cart', cart)
+      console.log('MATCHED', matched)
+
+      return matched[0]
+    }
   }
 
   handleClick(evt) {
     evt.preventDefault()
-    if (
-      this.props.cart.length === 0 ||
-      !this.findProductIdinCart(this.props.coffee.id, this.props.cart)
-    ) {
+    console.log('CART LENGHT', this.props.cart.length)
+    console.log('coffe id', this.props.coffee.id)
+
+    if (this.props.cart.length === 0) {
       this.props.addToCart(
         this.props.coffee,
         this.props.cart,
         this.props.userId,
         this.props.quantity
       )
-    } else if (
-      this.findProductIdinCart(this.props.coffee.id, this.props.cart)
-    ) {
-      const qty = this.findProductIdinCart(
-        this.props.coffee.id,
-        this.props.cart
-      ).quantity++
-      console.log('New Qty', qty)
+    } else {
+      console.log('In Cart > 0')
+
+      if (!this.findProductIdinCart(this.props.coffee.id, this.props.cart)) {
+        this.props.addToCart(
+          this.props.coffee,
+          this.props.cart,
+          this.props.userId,
+          this.props.quantity
+        )
+      } else {
+        console.log('aaaa')
+        const qty = this.findProductIdinCart(
+          this.props.coffee.id,
+          this.props.cart
+        ).quantity++
+        console.log('New Qty', qty)
+      }
     }
   }
 
@@ -87,7 +106,7 @@ const mapStateToProps = state => ({
 const mapDispatch = dispatch => ({
   addToCart: (item, cart, userId, quantity) =>
     dispatch(addToCart(item, cart, userId, quantity)),
-  fetchCartItems: orderId => dispatch(fetchCartItems(orderId))
+  fetchCartItems: userId => dispatch(fetchCartItems(userId))
 })
 
 export default connect(mapStateToProps, mapDispatch)(SingleCoffee)
