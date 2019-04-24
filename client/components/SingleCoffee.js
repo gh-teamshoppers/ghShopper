@@ -19,10 +19,10 @@ class SingleCoffee extends React.Component {
   }
 
   findProductIdinCart(searchId, cart) {
-    const matched = cart[0].products.filter(el => {
-      return el.id === searchId
-    })
-    return matched[0].OrdersProducts
+    // const matched = cart[0].products.filter(el => {
+    //   return el.id === searchId
+    // })
+    // return matched[0].OrdersProducts
   }
 
   handleClick(evt) {

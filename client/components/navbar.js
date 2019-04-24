@@ -16,15 +16,15 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links after you log in */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/about-us">About Us</Nav.Link>
-              <Link href="/all-coffee">Our Coffee</Link>
-              <Link href="/cart">Cart</Link>
+              <Link to="/">Home</Link>
+              <Link to="/about-us">About Us</Link>
+              <Link to="/all-coffee">Our Coffee</Link>
+              <Link to="/cart">Cart</Link>
 
-              <Nav.Link href="/" onClick={handleClick}>
+              <Link to="/" onClick={handleClick}>
                 {' '}
                 Log Out{' '}
-              </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -36,16 +36,16 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/" onClick={handleClick}>
+              <Link to="/" onClick={handleClick}>
                 {' '}
                 Home{' '}
-              </Nav.Link>
-              <Nav.Link href="/about-us">About Us</Nav.Link>
+              </Link>
+              <Link to="/about-us">About Us</Link>
               <Link to="/allcoffee">Our Coffee</Link>
               <Link to="/cart">Cart</Link>
 
-              <Nav.Link href="/sign-in">Sign In</Nav.Link>
-              <Nav.Link href="/signup">Sign Up</Nav.Link>
+              <Link to="/sign-in">Sign In</Link>
+              <Link to="/signup">Sign Up</Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
