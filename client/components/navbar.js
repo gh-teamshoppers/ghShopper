@@ -16,12 +16,20 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links after you log in */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Link to="/">Home</Link>
-              <Link to="/about-us">About Us</Link>
-              <Link to="/all-coffee">Our Coffee</Link>
-              <Link to="/cart">Cart</Link>
+              <Link className="navbar" to="/">
+                Home
+              </Link>
+              <Link className="navbar" to="/about-us">
+                About Us
+              </Link>
+              <Link className="navbar" to="/all-coffee">
+                Our Coffee
+              </Link>
+              <Link className="navbar" to="/cart">
+                Cart
+              </Link>
 
-              <Link to="/" onClick={handleClick}>
+              <Link className="navbar" to="/" onClick={handleClick}>
                 {' '}
                 Log Out{' '}
               </Link>
@@ -36,16 +44,26 @@ const Navbarfunc = ({handleClick, isLoggedIn}) => (
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Link to="/" onClick={handleClick}>
+              <Link className="navbar" to="/" onClick={handleClick}>
                 {' '}
                 Home{' '}
               </Link>
-              <Link to="/about-us">About Us</Link>
-              <Link to="/allcoffee">Our Coffee</Link>
-              <Link to="/cart">Cart</Link>
+              <Link class="navbar" to="/about-us">
+                About Us
+              </Link>
+              <Link className="navbar" to="/allcoffee">
+                Our Coffee
+              </Link>
+              <Link className="navbar" to="/cart">
+                Cart
+              </Link>
 
-              <Link to="/sign-in">Sign In</Link>
-              <Link to="/signup">Sign Up</Link>
+              <Link className="navbar" to="/sign-in">
+                Sign In
+              </Link>
+              <Link className="navbar" to="/signup">
+                Sign Up
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
