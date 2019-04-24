@@ -10,15 +10,6 @@ router.get('/cart', async (req, res, next) => {
   }
 })
 
-// router.get('/cart/:id', async (req, res, next) => {
-//   try {
-//     const singleOrder = await OrdersProducts.findByPk(req.params.id)
-//     res.json(singleOrder)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
 /// get all the item for the cart for 1 user
 router.get('/cart/:userId', async (req, res, next) => {
   try {
@@ -26,8 +17,8 @@ router.get('/cart/:userId', async (req, res, next) => {
       where: {userId: req.params.userId},
       include: [{model: Products}]
     })
-
-    res.json(orders)
+    const cart = orders[0].products
+    res.json(cart)
   } catch (err) {
     next(err)
   }

@@ -22,7 +22,7 @@ let initialState = []
 export const fetchCartItems = userId => async dispatch => {
   try {
     if (userId) {
-      const {data} = await axios.get('/api/orders/cart')
+      const {data} = await axios.get(`/api/orders/cart/${userId}`)
       dispatch(gotCartItems(data))
     }
   } catch (err) {
@@ -34,35 +34,24 @@ export const addToCart = (item, cart, userId, quantity) => async dispatch => {
   try {
     if (userId) {
       // axios routes
-      console.log('item', item)
-      console.log('cart', cart)
-      console.log('item', !cart.includes(item))
-
+      let newCartData = []
       if (cart.length === 0) {
-        const {newCartData} = await axios.post(`api/orders/${userId}/cart`, {
+        newCartData = await axios.post(`api/orders/${userId}/cart`, {
           productId: item.id,
           quantity: 1
         })
-        dispatch(addedToCart(newCartData))
-      } else {
-        console.log('item', !cart.includes(item))
-        if (!cart.includes(item)) {
-          const {newCartData} = await axios.post(`api/orders/${userId}/cart`, {
-            productId: item.id,
-            quantity: 1
-          })
-          dispatch(addedToCart(newCartData))
-        } else if (cart.includes(item)) {
-          const {newCartData} = await axios.put(
-            `api/orders/${userId}/cart/${orderId}`,
-            {
-              productId: item.id,
-              quantity: quantity++
-            }
-          )
-          dispatch(addedToCart(newCartData))
-        }
+      } else if (!cart.includes(item)) {
+        newCartData = await axios.post(`api/orders/${userId}/cart`, {
+          productId: item.id,
+          quantity: 1
+        })
+      } else if (cart.includes(item)) {
+        newCartData = await axios.put(`api/orders/${userId}/cart/${orderId}`, {
+          productId: item.id,
+          quantity: quantity++
+        })
       }
+      dispatch(addedToCart(newCartData))
     } else {
       //localStorage
       let itemsArray = localStorage.getItem('items')
