@@ -4,26 +4,25 @@ import Card from 'react-bootstrap/Card'
 const CartItem = props => {
   const {imgUrl, quantity, price, weight, name} = props.item
   return (
-    <Card style={{width: '18rem'}}>
+    <Card style={{width: '600px'}} className="cart">
       <Card.Body>
+        <br />
         <Card.Title>Product Name: {name}</Card.Title>
+        <br />
         <Card.Img variant="top" src={imgUrl} />
+        <br />
+        <br />
         <Card.Subtitle className="mb-2 text-muted">
           Quantity: {quantity}
         </Card.Subtitle>
+        <br />
         <Card.Subtitle className="mb-2 text-muted">
           Price:{price}{' '}
         </Card.Subtitle>
+        <br />
         <Card.Subtitle className="mb-2 text-muted">
           Weight {weight}
         </Card.Subtitle>
-
-        <Card.Link href="#">Add Another</Card.Link>
-        <br />
-        <Card.Link href="#">Delete Item</Card.Link>
-        <br />
-        <Card.Link href="#">See Details</Card.Link>
-        <br />
       </Card.Body>
     </Card>
   )

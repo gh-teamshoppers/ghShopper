@@ -36,3 +36,8 @@
 .d-block {
   border-radius: 25px;
 }
+
+.cart {
+  margin-left: auto;
+  margin-right: auto;
+}
