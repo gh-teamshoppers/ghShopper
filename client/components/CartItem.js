@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card'
 
 const CartItem = props => {
   const {imgUrl, quantity, price, weight, name} = props.item
+  //const qty = props.item.OrdersProducts.quantity
   return (
     <Card style={{width: '600px'}} className="cart">
       <Card.Body>
@@ -12,12 +13,10 @@ const CartItem = props => {
         <Card.Img variant="top" src={imgUrl} />
         <br />
         <br />
-        <Card.Subtitle className="mb-2 text-muted">
-          Quantity: {quantity}
-        </Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">Quantity: 1</Card.Subtitle>
         <br />
         <Card.Subtitle className="mb-2 text-muted">
-          Price:{price}{' '}
+          Price: ${price}{' '}
         </Card.Subtitle>
         <br />
         <Card.Subtitle className="mb-2 text-muted">
