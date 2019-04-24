@@ -9,9 +9,7 @@ import AllCoffees from './components/AllCoffees'
 import {HomePage} from './components/Homepage'
 import AboutUs from './components/About-us'
 import Cart from './components/Cart'
-import LocalStorage from './components/LocalStorage'
 import {CartCheckoutForm} from './components/CartCheckoutForm'
-import cart from './store/cart'
 import {onSubmit} from './components/onSubmit'
 
 /**
